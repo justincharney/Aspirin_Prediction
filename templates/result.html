@@ -18,16 +18,21 @@
     console.log( {{ plot_data.t2 | tojson }})
     console.log( {{ plot_data.t1 | tojson }})
 
-    const t1 = {{ plot_data.t1 | tojson }};
-    const t2 = {{ plot_data.t2 | tojson }};
+    let t1 = {{ plot_data.t1 | tojson }};
+    t1 = t1.map(value => parseFloat(value.toFixed(2)))
+    let t2 = {{ plot_data.t2 | tojson }};
+    t2 = t2.map(value => parseFloat(value.toFixed(2)))
     const y1 = {{ plot_data.y1 | tojson }};
     const y2 = {{ plot_data.y2 | tojson }};
 
     const firstDoseData = y1.map((value, index) => ({ x: t1[index], y: value }));
     const subsequentDosesData = y2.map((value, index) => ({ x: t2[index], y: value }));
 
+    let labels = {{ plot_data.t | tojson }};
+    labels = labels.map(value => parseFloat(value.toFixed(2)));
+
     const data = {
-        labels: {{ plot_data.t | tojson }},
+        labels: labels,
         datasets: [
             {
                 label: 'First Dose',
@@ -64,6 +69,11 @@
 
     const options = {
         responsive: true,
+        elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
         scales: {
             x: {
                 title: {
