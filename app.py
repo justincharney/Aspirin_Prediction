@@ -20,6 +20,8 @@ def index():
         plot_data['t'] = plot_data['t1'] + plot_data['t2']
         plot_data['y'] = plot_data['y1'] + plot_data['y2']
 
+        time_next_dose = round(float(time_next_dose) / 60, 2)
+
         return render_template('result.html', dose=dose, time_next_dose=time_next_dose, plot_data=plot_data)
 
 

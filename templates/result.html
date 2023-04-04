@@ -9,7 +9,7 @@
 <body>
     <h1>Aspirin Dose Calculator - Result</h1>
     <p>Dose in mg is: {{ dose }}</p>
-    <p>Time between doses in hours is: {{ time_next_dose / 60 }}</p>
+    <p>Time between doses in hours is: {{ time_next_dose }}</p>
     <canvas id="aspirinChart" width="800" height="400"></canvas>
     <a href="/">Go Back</a>
 
@@ -69,6 +69,15 @@
 
     const options = {
         responsive: true,
+        {#plugins: {#}
+        {#    tooltip: {#}
+        {#        displayColors: false,#}
+        {#        callbacks: {#}
+        {#            label(point) {#}
+        {#                return point.raw+' '#}
+        {#            }#}
+        {#        }#}
+        {#    }#}
         elements: {
                     point:{
                         radius: 0
