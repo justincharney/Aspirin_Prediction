@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aspirin Dose Calculator</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
 </head>
 <body>
-    <h1>Aspirin Dose Calculator</h1>
-    <form action="/calculate" method="post">
-        <label for="body_weight">Body Weight (kg):</label>
-        <input type="number" name="body_weight" step="0.1" required>
-        <br>
-        <label for="dose_step">Dose Step (mg):</label>
-        <input type="number" name="dose_step" required>
-        <br>
-        <input type="submit" value="Calculate">
-    </form>
+<section class="bg-white dark:bg-gray-900 min-h-screen">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Aspirin Dose Calculator</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Enter a body weight and your smallest available aspirin dose to determine the proper dosage to alleviate migraines for your body weight.
+        </p>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">THIS IS NOT MEDICAL ADVICE, PLEASE CONSULT YOUR PHYSICIAN BEFORE STARTING ANY MEDICATION</p>
+
+        <form action="/calculate" method="post">
+            <label for="body_weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body Weight (kg):</label>
+            <input type="number" name="body_weight" step="0.1" class="mb-6 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+            <label for="dose_step" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dose Step (mg):</label>
+            <input type="number" name="dose_step" class="mb-6 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+            <br>
+            <input type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Calculate">
+        </form>
+</section>
 </body>
 </html>
