@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspirin Dose Calculator</title>
+</head>
+<body>
+    <h1>Aspirin Dose Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="body_weight">Body Weight (kg):</label>
+        <input type="number" name="body_weight" step="0.1" required>
+        <br>
+        <label for="dose_step">Dose Step (mg):</label>
+        <input type="number" name="dose_step" required>
+        <br>
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
