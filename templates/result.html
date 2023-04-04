@@ -15,19 +15,30 @@
 
     <script>
     const ctx = document.getElementById('aspirinChart').getContext('2d');
+    console.log( {{ plot_data.t2 | tojson }})
+    console.log( {{ plot_data.t1 | tojson }})
+
+    const t1 = {{ plot_data.t1 | tojson }};
+    const t2 = {{ plot_data.t2 | tojson }};
+    const y1 = {{ plot_data.y1 | tojson }};
+    const y2 = {{ plot_data.y2 | tojson }};
+
+    const firstDoseData = y1.map((value, index) => ({ x: t1[index], y: value }));
+    const subsequentDosesData = y2.map((value, index) => ({ x: t2[index], y: value }));
+
     const data = {
         labels: {{ plot_data.t | tojson }},
         datasets: [
             {
                 label: 'First Dose',
-                data: {{ plot_data.y1 | tojson }},
+                data: firstDoseData,
                 borderColor: 'black',
                 borderWidth: 1.5,
                 fill: false
             },
             {
                 label: 'Subsequent Doses',
-                data: {{ plot_data.y2 | tojson }},
+                data: subsequentDosesData,
                 borderColor: 'blue',
                 borderWidth: 1.5,
                 fill: false
@@ -50,6 +61,7 @@
             }
         ]
     };
+
     const options = {
         responsive: true,
         scales: {
