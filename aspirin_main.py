@@ -51,24 +51,17 @@ def aspirin_main(BW, dose_step):
         else:
             break
 
-    # Plotting
-    # plt.plot(time[:idx + 1], sol[:idx + 1, 0], 'black', linewidth=1.5, label='First Dose')
-    # plt.plot(t2, sol2[:, 0], 'blue', linewidth=1.5, label='Subsequent Doses')
-    # plt.axhline(min_effective, color='green', linewidth=1.5, label='Minimum Effective Concentration')
-    # plt.axhline(max_safe, color='red', linewidth=1.5, label='Maximum Safe Concentration')
-    # plt.xlabel('time (min)')
-    # plt.ylabel('Plasma Concentration (mg/ml)')
-    # plt.legend()
-    # plt.show()
-    #
-    # print("Dose in mg is:", dose)
-    # print("Time between doses in hours is:", time_next_dose / 60)
-    print('Dose in mg is:')
-    print(dose)
-    print('Time between doses in hours is: ')
-    print(time_next_dose / 60)
+    # Return the data for plotting along with the dose and time_next_dose
+    plot_data = {
+        't1': time[:idx].tolist(),
+        'y1': sol[:idx, 0].tolist(),
+        't2': t2.tolist(),
+        'y2': sol2[:, 0].tolist(),
+        'min_effective': min_effective,
+        'max_safe': max_safe
+    }
 
-    return dose, time_next_dose
+    return dose, time_next_dose, plot_data
 
 
 def aspirin_odes(y, t, Vp, ke, phi, PS, Vg):

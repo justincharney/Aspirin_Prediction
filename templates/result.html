@@ -4,11 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aspirin Dose Calculator - Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <h1>Aspirin Dose Calculator - Result</h1>
     <p>Dose in mg is: {{ dose }}</p>
     <p>Time between doses in hours is: {{ time_next_dose / 60 }}</p>
+    <canvas id="aspirinChart" width="800" height="400"></canvas>
     <a href="/">Go Back</a>
+
+    <script>
+    const ctx = document.getElementById('aspirinChart').getContext('2d');
+    const data = {
+        labels: {{ plot_data.t | tojson }},
+        datasets: [
+            {
+                label: 'First Dose',
+                data: {{ plot_data.y1 | tojson }},
+                borderColor: 'black',
+                borderWidth: 1.5,
+                fill: false
+            },
+            {
+                label: 'Subsequent Doses',
+                data: {{ plot_data.y2 | tojson }},
+                borderColor: 'blue',
+                borderWidth: 1.5,
+                fill: false
+            },
+            {
+                label: 'Minimum Effective Concentration',
+                data: Array({{ plot_data.t | length }}).fill({{ plot_data.min_effective }}),
+                borderColor: 'green',
+                borderWidth: 1.5,
+                borderDash: [5, 5],
+                fill: false
+            },
+            {
+                label: 'Maximum Safe Concentration',
+                data: Array({{ plot_data.t | length }}).fill({{ plot_data.max_safe }}),
+                borderColor: 'red',
+                borderWidth: 1.5,
+                borderDash: [5, 5],
+                fill: false
+            }
+        ]
+    };
+    const options = {
+        responsive: true,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time (min)'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Plasma Concentration (mg/mL)'
+                }
+            }
+        }
+    };
+
+    new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
+</script>
 </body>
 </html>
